@@ -1,0 +1,24 @@
+{
+  "name": "balls-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex-smg/balls-back.git"
+  },
+  "author": "Alexandre Smagghe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alex-smg/balls-back/issues"
+  },
+  "homepage": "https://github.com/alex-smg/balls-back#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.1",
+    "nodemon": "^2.0.2"
+  }
+}

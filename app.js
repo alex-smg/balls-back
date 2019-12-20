@@ -19,6 +19,6 @@ const app = express();
 //     res.send('Welcome');
 // })
 
-app.use('/', require('./routes/sport'));
+app.use('/', require('./routes/person'));
 
 app.listen(3000);

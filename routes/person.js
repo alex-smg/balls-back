@@ -31,11 +31,28 @@ router.use(function(req, res, next) {
 router.get("/", function(req,res) {
   Person.find({})
   .then(function(person) {
+    console.log(person);
     res.send(person);
   })
   .catch(function(err) {
     res.json(err);
   })
 });
+
+router.post('/', function (req, res) {
+    let person = new Person( {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      image: req.body.image,
+      roles: req.body.roles,
+      firstname: req.body.firstname,
+      lastname: lastname,
+    })
+    person.save();
+
+    res.send('C good');
+  }
+);
 
 module.exports = router;

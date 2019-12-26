@@ -21,4 +21,6 @@ const app = express();
 
 app.use('/', require('./routes/person'));
 
+app.use('/team', require('./routes/team'));
+
 app.listen(3000);

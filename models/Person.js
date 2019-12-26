@@ -12,6 +12,12 @@ var personSchema = new mongoose.Schema({
     updated_at: Date
 },{ collection : 'person' });
 
+personSchema.virtual('teams', {
+    ref: 'Team',
+    localField: '_id',
+    foreignField: 'types'
+});
+
 var Person = mongoose.model('Person', personSchema);
 
 module.exports = Person;

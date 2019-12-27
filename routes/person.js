@@ -1,6 +1,7 @@
 var router = require('express').Router();
 
 var Person = require('../models/Person');
+var jwt = require('jsonwebtoken');
 
 // router.get('/', (req, res) => {
 //   person.find(null, function(err, person) {
@@ -41,18 +42,57 @@ router.get("/", function(req,res) {
 });
 
 router.post('/', function (req, res) {
-    console.log(req.body);
-    let person = new Person({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      image: req.body.image,
-      roles: req.body.roles,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
+    console.log( req.body);
+    new Promise((resolve, reject) => {
+        resolve(new Person())
+    }).then(person => {
+        person.name = req.body.name;
+        person.email= req.body.email;
+        person.password= req.body.password;
+        person.image= req.body.image;
+        person.roles= req.body.roles;
+        person.firstname= req.body.firstname;
+        person.lastname= req.body.lastname;
+        return person.save();
+    })
+});
+router.post('/login', function (req, res) {
+    console.log(req.body)
+    Person.findOne({
+        email: req.body.email
+    })
+        .then(person => {
+            console.log(person);
+            if(person) {
+                    if(req.body.password === person.password) {
+                        const payload = {
+                            _id : person._id,
+                            name: person.name,
+                            email: person.email,
+                            image: person.image,
+                            firstname: person.firstname,
+                            lastname: person.lastname
+                        };
+                        let token = jwt.sign(payload, process.env.SECRET_key, {
+                            expiresIn:  1440
+                        });
+                        console.log('c good');
+                        res.send(token)
+
+
+                    } else {
+                        console.log('nop');
+                        res.json({error: 'Password incorrect'});
+
+                      }
+            } else {
+                    console.log('nop');
+                    res.json({error: 'User incorrect'});
+                }
+        })
+        .catch(err => {
+            res.send(err)
+        })
     });
-    person.save();
-  }
-);
 
 module.exports = router;

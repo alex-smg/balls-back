@@ -41,6 +41,29 @@ router.get("/", function(req,res) {
     res.json(err);
   })
 });
+router.get("/:id", function(req,res) {
+    Person.findById(req.params.id)
+     .then(person => {
+         finalPerson = {
+             email: person.email,
+             image: person.image,
+             firstname: person.firstname,
+             lastname: person.lastname
+         };
+        res.json(finalPerson);
+    })
+});
+
+router.delete("/delete/:id", function(req,res) {
+    Person.findByIdAndRemove(req.params.id, (err, todo) => {
+        if (err) return res.status(500).send(err);
+        const response = {
+            message: "Person deleted",
+            id: todo._id
+        };
+        return res.status(200).send(response);
+    });
+});
 
 router.post('/', function (req, res) {
     console.log( req.body);
@@ -77,10 +100,8 @@ router.post('/login', function (req, res) {
                         let token = jwt.sign(payload, process.env.SECRET_key, {
                             expiresIn:  1440
                         });
-                        console.log(token);
 
-                        res.send(token);
-                        console.log('c good');
+                        return res.json(token)
 
 
                     } else {

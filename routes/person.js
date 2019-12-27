@@ -2,6 +2,7 @@ var router = require('express').Router();
 
 var Person = require('../models/Person');
 var jwt = require('jsonwebtoken');
+process.env.SECRET_key = 'secret';
 
 // router.get('/', (req, res) => {
 //   person.find(null, function(err, person) {
@@ -76,8 +77,10 @@ router.post('/login', function (req, res) {
                         let token = jwt.sign(payload, process.env.SECRET_key, {
                             expiresIn:  1440
                         });
+                        console.log(token);
+
+                        res.send(token);
                         console.log('c good');
-                        res.send(token)
 
 
                     } else {

@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var teamSchema = new mongoose.Schema({
+let teamSchema = new mongoose.Schema({
     name: String,
     description: String,
     image: String,
     player_creator: Number,
     player_admin: Number,
-    created_at: Date,
+    updated_at: Date,
     full: Boolean,
     persons : [
         {
@@ -14,9 +14,14 @@ var teamSchema = new mongoose.Schema({
             ref: 'Person'
         }
     ],
-    updated_at: Date
+    tournaments : [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Tournaments'
+        }
+    ],
 }, { collection : 'team' });
 
-var Team = mongoose.model('Team', teamSchema);
+let Team = mongoose.model('Team', teamSchema);
 
 module.exports = Team;

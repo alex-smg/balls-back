@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var sportSchema = new mongoose.Schema({
+let sportSchema = new mongoose.Schema({
     name: String,
     description: String,
     picture: String,
@@ -12,6 +12,6 @@ var sportSchema = new mongoose.Schema({
     ]
 });
 
-var Sport = mongoose.model('Sport', sportSchema);
+let Sport = mongoose.model('Sport', sportSchema);
 
 module.exports = Sport;

@@ -7,7 +7,7 @@ let tournamentSchema = new mongoose.Schema({
     addressRegion: String,
     postalCode: String,
     streetAddress: String,
-    codeRegion: Number,
+    codeRegion: String,
     lattitude: Number,
     longitude: Number,
     image: String,

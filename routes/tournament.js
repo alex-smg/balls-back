@@ -38,9 +38,9 @@ router.get("/:id", function(req,res) {
 
 router.get("/search/:code", function(req, res) {
     console.log(req.params);
-    if (req.params.activeReg === true) {
+    if (req.query.activeReg === 'true') {
         console.log('région');
-        Tournament.find({ codeRegion: new RegExp('^' + req.params.code)})
+        Tournament.find({ codeRegion: req.params.code })
             .then((tournaments) => {
                 console.log(tournaments);
                 res.send(tournaments);

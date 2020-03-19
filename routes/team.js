@@ -60,6 +60,14 @@ router.post('/', function (req, res) {
     })
 });
 
+router.post('/addPlayer', function (req, res) {
+    Team.findById(req.params.id)
+        .then(team => {
+            team.persons = Types.ObjectId(req.params.playerId)
+        })
+
+});
+
 router.put('/:id', function(req,res){
     Team.findById(req.params.id, function(err, team) {
         if (err){

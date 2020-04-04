@@ -53,7 +53,16 @@ router.get("/:id", function(req,res) {
              email: person.email,
              image: person.image,
              firstname: person.firstname,
-             lastname: person.lastname
+             lastname: person.lastname,
+             image: person.image,
+             created_at: person.created_at,
+             roles: person.roles,
+             height: person.height,
+             birth: person.birth,
+             postPlayer: person.postPlayer,
+             level: person.level,
+             gender: person.gender,
+             club: person.club,
          };
         res.json(finalPerson);
     })

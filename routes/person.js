@@ -67,6 +67,16 @@ router.get("/:id", function(req,res) {
         res.json(finalPerson);
     })
 });
+router.get("/search/email", function(req, res) {
+    console.log(req.query.email);
+    Person.find({email: req.query.email})
+        .then((person) => {
+            res.send(person[0]._id);
+        })
+        .catch(function (err) {
+            res.json(err);
+        })
+})
 
 router.delete("/delete/:id", function(req,res) {
     Person.findByIdAndRemove(req.params.id, (err, todo) => {

@@ -2,6 +2,15 @@ let router = require('express').Router();
 
 let RequestTeam = require('../models/RequestTeam');
 
+const Pusher = require('pusher');
+const pusher = new Pusher({
+    appId: '980442',
+    key: '9d6e61f69ec4ae232c76',
+    secret: '8ad18769dc3410058509',
+    cluster: 'eu',
+    encrypted: true
+});
+
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -38,6 +47,13 @@ router.post('/', function (req, res) {
         requestTeam.idPlayer= req.body.idPlayer;
         requestTeam.accepted= req.body.accepted;
         requestTeam.refused= req.body.refused;
+        requestTeam.save();
+        pusher.trigger('balls-notification', 'my-event' , {
+            "message": "hello world"
+        });
+        return res.json("good");
         }
-    )});
+    ).catch(function(err) {
+        res.json(err);
+    })});
 module.exports = router;

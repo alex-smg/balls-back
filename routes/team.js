@@ -56,7 +56,12 @@ router.post('/', function (req, res) {
         team.player_creator= req.body.player_creator;
         team.player_admin= req.body.player_admin;
         team.full = req.body.full;
-        return team.save();
+        team.save( (err, savedTeam) => {
+            if (err) console.log(err);
+            else {
+               return res.json(savedTeam._id)
+            }
+        });
     })
 });
 

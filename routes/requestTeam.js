@@ -48,7 +48,9 @@ router.post('/', function (req, res) {
         requestTeam.accepted= req.body.accepted;
         requestTeam.refused= req.body.refused;
         requestTeam.save();
-        pusher.trigger('balls-notification', 'my-event' , {
+        let id = JSON.stringify(req.body.body.idPlayer);
+        console.log(id);
+        pusher.trigger('notif', `${id}`, {
             "message": "hello world"
         });
         return res.json("good");

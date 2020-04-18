@@ -35,6 +35,7 @@ app.use('/person', require('./routes/person'));
 app.use('/team', require('./routes/team'));
 app.use('/tournament', require('./routes/tournament'));
 app.use('/requestTeam', require('./routes/requestTeam'));
+app.use('/file', require('./routes/file'));
 
 app.use('/upload', express.static('upload'));
 

@@ -94,8 +94,6 @@ router.post('/', function (req, res) {
     new Promise((resolve, reject) => {
         resolve(new Person())
     }).then(person => {
-        let file = req.files.file;
-        file.mv('./upload/' + req.files.file.name);
         person.email= req.body.email;
         person.password= req.body.password;
         person.roles= req.body.roles;

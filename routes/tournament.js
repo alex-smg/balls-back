@@ -22,17 +22,7 @@ router.get("/", function(req,res) {
 router.get("/:id", function(req,res) {
     Tournament.findById(req.params.id)
         .then(tournament => {
-            finalTournament = {
-                name: tournament.name,
-                description: tournament.description,
-                image: tournament.image,
-                publish: tournament.publish,
-                full: tournament.full,
-                teams: tournament.teams,
-                creator: tournament.creator,
-                admin: tournament.admin
-            };
-            res.json(finalTournament);
+            res.json(tournament);
         })
 });
 

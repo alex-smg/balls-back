@@ -12,7 +12,7 @@ router.post('/', function (req, res) {
     let extension = req.files.mimetype === 'image/png' ? '.png' : '.jpg';
     let name = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     file.mv(`./upload/${req.body.folder}/${name}${extension}`);
-    res.json(`./upload/${req.body.folder}/${name}${extension}`)
+    res.json(`upload/${req.body.folder}/${name}${extension}`)
 
 });
 

@@ -23,6 +23,12 @@ let personSchema = new mongoose.Schema({
             ref: 'Team'
         }
     ],
+    tournaments : [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Tournament'
+        }
+    ],
 },{ collection : 'person' });
 
 personSchema.pre('save', function(next){

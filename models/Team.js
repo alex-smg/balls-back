@@ -4,10 +4,18 @@ let teamSchema = new mongoose.Schema({
     name: String,
     description: String,
     image: String,
-    player_creator: Number,
-    player_admin: Number,
+    player_creator: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Person'
+    },
+    player_admin: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Person'
+    },
     updated_at: Date,
     full: Boolean,
+    nbrPlayer: Number,
+    searchPlayer: Boolean,
     persons : [
         {
             type: mongoose.Types.ObjectId, 

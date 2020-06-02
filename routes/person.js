@@ -47,9 +47,10 @@ router.get("/", function(req,res) {
   })
 });
 router.get("/:id", function(req,res) {
-    Person.findById(req.params.id)
+    Person.findById(req.params.id).populate('teams').populate('tournaments')
      .then(person => {
          finalPerson = {
+             id: person.id,
              email: person.email,
              image: person.image,
              firstname: person.firstname,
@@ -63,6 +64,8 @@ router.get("/:id", function(req,res) {
              level: person.level,
              gender: person.gender,
              club: person.club,
+             teams: person.teams,
+             tournaments: person.tournaments
          };
         res.json(finalPerson);
     })
@@ -104,8 +107,8 @@ router.post('/', function (req, res) {
         person.birth= req.body.birth;
         person.postPlayer= req.body.postPlayer;
         person.level= req.body.level;
-        person.genre= req.body.genre;
-        person.image= 'upload/' + req.files.file.name;
+        person.gender= req.body.gender;
+        person.image= req.body.image;
         res.json({'file': 'good'});
         return person.save();
     })
@@ -164,14 +167,9 @@ router.post('/login', function (req, res) {
                             payload,
                             isToken: true
                         });
-
-
                     } else {
-                        console.log('nop');
                         res.json({error: 'Password incorrect', isToken: false });
-
-
-                      }
+                    }
             } else {
                     console.log('nop');
                     res.json({error: 'User incorrect', isToken: false});

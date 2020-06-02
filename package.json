@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set PORT=3000 && nodemon app.js"
+    "serve": "set PORT=3000 && nodemon app.js"
   },
   "repository": {
     "type": "git",

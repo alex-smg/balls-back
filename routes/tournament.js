@@ -1,6 +1,7 @@
 let router = require('express').Router();
-
+let mongoose = require('mongoose');
 let Tournament = require('../models/Tournament');
+let Person = require('../models/Person');
 
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -20,7 +21,7 @@ router.get("/", function(req,res) {
 });
 
 router.get("/:id", function(req,res) {
-    Tournament.findById(req.params.id)
+    Tournament.findById(req.params.id).populate('creator').populate('teams')
         .then(tournament => {
             res.json(tournament);
         })
@@ -62,7 +63,6 @@ router.delete("/delete/:id", function(req,res) {
 });
 
 router.post('/', function (req, res) {
-    console.log( req.body);
     new Promise((resolve, reject) => {
         resolve(new Tournament())
     }).then(tournament => {
@@ -79,7 +79,7 @@ router.post('/', function (req, res) {
         tournament.publish = req.body.publish;
         tournament.full = req.body.full;
         tournament.teams = req.body.teams;
-        tournament.creator = req.body.creator;
+        tournament.creator = mongoose.Types.ObjectId(req.body.creator);
         tournament.gender = req.body.gender;
         tournament.admin = req.body.admin;
         tournament.date_begin = req.body.date_begin,
@@ -89,10 +89,37 @@ router.post('/', function (req, res) {
         tournament.numberTeam = req.body.numberTeam,
         tournament.level =  req.body.level,
         tournament.typeOfHen = req.body.typeOfHen,
-        res.json({'file': 'good'});
-        return tournament.save();
+         tournament.save( (err, savedTournament) => {
+             if (err) console.log(err);
+             else {
+                 Person.findById(req.body.creator).then(person => {
+                     person.tournaments.push(mongoose.Types.ObjectId(savedTournament._id));
+                     person.save(function(err){
+                         if(err){
+                             res.send(err);
+                         }
+                     });
+                 })
+                 return res.json(savedTournament);
+             }
+         });
     })
 });
+
+router.post('/addTeam', function (req, res) {
+   Tournament.findById(req.body.idTournament, function(err, tournament) {
+       console.log(req.body.idTournament)
+       console.log(req.body.idTeam)
+       tournament.teams.push(mongoose.Types.ObjectId(req.body.idTeam))
+       tournament.save((err, savedTournament) => {
+           if (err) console.log(err);
+           else {
+               res.json(savedTournament);
+           }
+       })
+   });
+});
+
 
 router.put('/:id', function(req,res){
     Tournament.findById(req.params.id, function(err, tournament) {

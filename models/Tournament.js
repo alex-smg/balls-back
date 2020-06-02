@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 let tournamentSchema = new mongoose.Schema({
     name: String,
@@ -21,12 +22,11 @@ let tournamentSchema = new mongoose.Schema({
     typeOfHen: String,
     publish: Boolean,
     full: Boolean,
-    creator:[
-        {
-            type: mongoose.Types.ObjectId,
-            ref: 'Person'
-        }
-    ],
+    creator:
+    {
+        type: mongoose.Types.ObjectId,
+        ref: 'Person'
+    },
     admin: [
         {
             type: mongoose.Types.ObjectId,

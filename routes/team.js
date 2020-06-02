@@ -1,6 +1,8 @@
 let router = require('express').Router();
+let mongoose = require('mongoose');
 
 let Team = require('../models/Team');
+let Person = require('../models/Person');
 
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -59,7 +61,16 @@ router.post('/', function (req, res) {
         team.save( (err, savedTeam) => {
             if (err) console.log(err);
             else {
-               return res.json(savedTeam._id)
+                Person.findById(req.body.player_admin).then(person => {
+                    console.log(savedTeam);
+                    person.teams.push(mongoose.Types.ObjectId(savedTeam._id));
+                    person.save(function(err){
+                        if(err){
+                            res.send(err);
+                        }
+                    });
+                })
+               return res.json(savedTeam)
             }
         });
     })
@@ -68,9 +79,8 @@ router.post('/', function (req, res) {
 router.post('/addPlayer', function (req, res) {
     Team.findById(req.params.id)
         .then(team => {
-            team.persons = Types.ObjectId(req.params.playerId)
+            team.persons = mongoose.Types.ObjectId(req.params.playerId)
         })
-
 });
 
 router.put('/:id', function(req,res){

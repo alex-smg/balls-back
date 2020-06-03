@@ -111,12 +111,8 @@ router.post('/addTeam', function (req, res) {
        console.log(req.body.idTournament)
        console.log(req.body.idTeam)
        tournament.teams.push(mongoose.Types.ObjectId(req.body.idTeam))
-       tournament.save((err, savedTournament) => {
-           if (err) console.log(err);
-           else {
-               res.json(savedTournament);
-           }
-       })
+       tournament.save();
+       res.json(tournament);
    });
 });
 

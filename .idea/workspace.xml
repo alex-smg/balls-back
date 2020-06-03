@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43e4f8bb-674c-4567-8867-3148d363319e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Person.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Person.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Team.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Team.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Tournament.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/Tournament.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/file.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/file.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/person.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/person.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/team.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/team.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/tournament.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tournament.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/tournament.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="23" column="74" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+            <state relative-caret-position="360">
+              <caret line="153" column="24" lean-forward="true" selection-start-line="153" selection-start-column="24" selection-end-line="153" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -226,12 +218,12 @@
       <workItem from="1590850340221" duration="604000" />
       <workItem from="1590958275820" duration="6225000" />
       <workItem from="1591009003990" duration="5023000" />
-      <workItem from="1591108727879" duration="6843000" />
+      <workItem from="1591108727879" duration="9936000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72327000" />
+    <option name="totallyTimeSpent" value="75420000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -390,8 +382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/tournament.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="23" column="74" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+        <state relative-caret-position="360">
+          <caret line="153" column="24" lean-forward="true" selection-start-line="153" selection-start-column="24" selection-end-line="153" selection-end-column="24" />
         </state>
       </provider>
     </entry>

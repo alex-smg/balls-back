@@ -13,7 +13,6 @@ router.use(function(req, res, next) {
 router.get("/", function(req,res) {
 Team.find({}).populate('teams', 'tournaments')
   .then(function(teams) {
-    console.log(teams);
     res.send(teams);
   })
   .catch(function(err) {
@@ -48,7 +47,6 @@ router.delete("/delete/:id", function(req,res) {
 });
 
 router.post('/', function (req, res) {
-    console.log( req.body);
     new Promise((resolve, reject) => {
         resolve(new Team())
     }).then(team => {
@@ -58,11 +56,11 @@ router.post('/', function (req, res) {
         team.player_creator= req.body.player_creator;
         team.player_admin= req.body.player_admin;
         team.full = req.body.full;
+        team.nbrPlayer = req.body.nbrPlayer;
         team.save( (err, savedTeam) => {
             if (err) console.log(err);
             else {
                 Person.findById(req.body.player_admin).then(person => {
-                    console.log(savedTeam);
                     person.teams.push(mongoose.Types.ObjectId(savedTeam._id));
                     person.save(function(err){
                         if(err){

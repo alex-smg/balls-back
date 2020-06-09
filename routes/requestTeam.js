@@ -35,25 +35,41 @@ router.get("/search/:id", function(req, res) {
                 res.json(err);
             })
 });
+router.get("/search/player/:id", function(req, res) {
+    console.log(req.params);
+    RequestTeam.find({ idPlayer: req.params.id })
+        .then((requestTeam) => {
+            res.send(requestTeam);
+        })
+        .catch(function(err) {
+            res.json(err);
+        })
+});
 
 router.post('/', function (req, res) {
-    console.log( req.body);
+    console.log(req.body);
     new Promise((resolve, reject) => {
         resolve(new RequestTeam())
     }).then(requestTeam => {
+        console.log(req.body.nameTeam)
         requestTeam.idTeam = req.body.idTeam;
         requestTeam.nameTeam= req.body.nameTeam;
         requestTeam.idApplicant= req.body.idApplicant;
         requestTeam.idPlayer= req.body.idPlayer;
-        requestTeam.accepted= req.body.accepted;
-        requestTeam.refused= req.body.refused;
-        requestTeam.save();
-        let id = JSON.stringify(req.body.body.idPlayer);
-        console.log(id);
-        pusher.trigger('notif', `${id}`, {
-            "message": "hello world"
+        requestTeam.accepted= false;
+        requestTeam.refused= false;
+        requestTeam.save( (err, savedTeam) => {
+            if (err) console.log(err);
+            else {
+                let id = JSON.stringify(req.body.idPlayer);
+                pusher.trigger('notif', `${id}`, {
+                    "message": "hello world"
+                });
+                return res.json(savedTeam)
+            }
         });
-        return res.json("good");
+
+
         }
     ).catch(function(err) {
         res.json(err);

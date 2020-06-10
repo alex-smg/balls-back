@@ -1,25 +1,22 @@
 let mongoose = require('mongoose');
 
 let RequestTeamSchema = new mongoose.Schema({
-    idTeam : [
+    idTeam :
         {
             type: mongoose.Types.ObjectId,
             ref: 'Team'
-        }
-    ],
+        },
     nameTeam: String,
-    idApplicant: [
+    idApplicant:
         {
             type: mongoose.Types.ObjectId,
             ref: 'Person'
-        }
-    ],
-    idPlayer: [
+        },
+    idPlayer:
         {
             type: mongoose.Types.ObjectId,
             ref: 'Person'
-        }
-    ],
+        },
     accepted: Boolean,
     refused: Boolean
 }, { collection : 'request' });

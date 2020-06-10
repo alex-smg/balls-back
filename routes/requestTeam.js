@@ -35,15 +35,23 @@ router.get("/search/:id", function(req, res) {
                 res.json(err);
             })
 });
+
 router.get("/search/player/:id", function(req, res) {
     console.log(req.params);
-    RequestTeam.find({ idPlayer: req.params.id })
+    RequestTeam.find({ idPlayer: req.params.id }).populate('idTeam').populate('idApplicant')
         .then((requestTeam) => {
             res.send(requestTeam);
         })
         .catch(function(err) {
             res.json(err);
         })
+});
+
+router.delete('/:id', function(req, res) {
+    RequestTeam.findOneAndRemove({_id: req.params.id}, function(err){
+        console.log(err)
+    });
+    res.send('good');
 });
 
 router.post('/', function (req, res) {
@@ -62,9 +70,12 @@ router.post('/', function (req, res) {
             if (err) console.log(err);
             else {
                 let id = JSON.stringify(req.body.idPlayer);
-                pusher.trigger('notif', `${id}`, {
-                    "message": "hello world"
-                });
+                RequestTeam.findOne({ _id: savedTeam._id }).populate('idTeam').populate('idApplicant')
+                    .then((requestTeam) => {
+                        pusher.trigger('notif', `${id}`, {
+                            requestTeam
+                        });
+                    });
                 return res.json(savedTeam)
             }
         });
@@ -73,5 +84,7 @@ router.post('/', function (req, res) {
         }
     ).catch(function(err) {
         res.json(err);
-    })});
+    })
+});
+
 module.exports = router;

@@ -101,5 +101,29 @@ router.put('/:id', function(req,res){
     });
 });
 
+router.patch('/acceptRequest', function(req,res){
+    Team.findById(req.body.id, function(err, team) {
+        if (err){
+            res.send(err);
+        }
+        team.persons.push(req.body.idPlayer);
+        team.save(function(err, savedTeam){
+            if(err){
+                res.send(err);
+            }else {
+                res.json(savedTeam);
+            }
+        });
+    });
+});
+
+router.delete('/:id', function(req, res) {
+    console.log(req.params.id);
+    Team.findOneAndRemove({_id: req.params.id}, function(err){
+        console.log(err)
+    });
+    res.send('good');
+});
+
 module.exports = router;
 
